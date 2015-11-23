@@ -61,6 +61,15 @@ namespace OSecApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Document is required for event..
+        /// </summary>
+        internal static string DocumentEventArgs_DocumentRequiredException {
+            get {
+                return ResourceManager.GetString("DocumentEventArgs_DocumentRequiredException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Document content argument may not be null..
         /// </summary>
         internal static string DocumentOptions_ContentIsRequiredException {

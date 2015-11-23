@@ -30,6 +30,11 @@
             }
         }
 
+        public override string ToString()
+        {
+            return name;
+        }
+
         public override int GetHashCode()
         {
             return name.GetHashCode();

@@ -5,7 +5,7 @@
 
     public class DocumentOptions
     {
-        private readonly string contents;
+        private readonly string content;
         private readonly FileInfo file;
         private readonly string name;
 
@@ -14,11 +14,11 @@
             this.name = name;
         }
 
-        public DocumentOptions(string contents, string name = null)
+        public DocumentOptions(string content, string name = null)
             : this(name)
         {
-            this.contents = contents;
-            if (this.contents == null)
+            this.content = content;
+            if (this.content == null)
             {
                 throw new ArgumentNullException("contents", Properties.Resources.DocumentOptions_ContentIsRequiredException);
             }
@@ -47,11 +47,11 @@
             }
         }
 
-        public string Contents
+        public string Content
         {
             get
             {
-                return contents;
+                return content;
             }
         }
 

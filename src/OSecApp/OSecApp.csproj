@@ -66,6 +66,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Document.cs" />
+    <Compile Include="DocumentEventArgs.cs" />
+    <Compile Include="DocumentManager.cs" />
     <Compile Include="DocumentOptions.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
