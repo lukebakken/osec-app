@@ -2,29 +2,32 @@
 {
     using System;
     using System.IO;
-    using System.Threading;
 
     public class DocumentOptions
     {
-        public const string DefaultPrefix = "Document-";
-        private static int idx = 0;
-
         private readonly string contents;
+        private readonly FileInfo file;
         private readonly string name;
 
+        private DocumentOptions(string name)
+        {
+            this.name = name;
+        }
+
         public DocumentOptions(string contents, string name = null)
+            : this(name)
         {
             this.contents = contents;
             if (this.contents == null)
             {
                 throw new ArgumentNullException("contents", Properties.Resources.DocumentOptions_ContentIsRequiredException);
             }
-
-            this.name = MakeName(name);
         }
 
         public DocumentOptions(FileInfo file, string name = null)
+            : this(name)
         {
+            this.file = file;
             if (file == null)
             {
                 throw new ArgumentNullException("contents", Properties.Resources.DocumentOptions_FileIsRequiredException);
@@ -34,23 +37,30 @@
             {
                 throw new FileNotFoundException(Properties.Resources.DocumentOptions_FileNotFoundException, file.FullName);
             }
-
-            this.name = MakeName(name, file);
         }
 
-        private static string MakeName(string name)
+        public string Name
         {
-            if (name == null)
+            get
             {
-                name = string.Format("{0}{1}", DefaultPrefix, Interlocked.Increment(ref idx));
+                return name;
             }
-
-            return name;
         }
 
-        private static string MakeName(string name, FileInfo file)
+        public string Contents
         {
-            return name;
+            get
+            {
+                return contents;
+            }
+        }
+
+        public FileInfo File
+        {
+            get
+            {
+                return file;
+            }
         }
     }
 }
