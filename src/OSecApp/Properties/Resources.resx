@@ -123,13 +123,10 @@
   <data name="DocumentOptions_ContentIsRequiredException" xml:space="preserve">
     <value>Document content argument may not be null.</value>
   </data>
-  <data name="DocumentOptions_FileIsRequiredException" xml:space="preserve">
-    <value>File argument may not be null.</value>
-  </data>
-  <data name="DocumentOptions_FileNotFoundException" xml:space="preserve">
-    <value>File argument does not exist.</value>
-  </data>
   <data name="OptionsAreRequiredException" xml:space="preserve">
     <value>Options are required.</value>
+  </data>
+  <data name="Search_SearchTermRequiredException" xml:space="preserve">
+    <value>Search requires a non-null, non-whitespace search term.</value>
   </data>
 </root>

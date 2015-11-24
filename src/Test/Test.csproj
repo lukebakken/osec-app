@@ -44,6 +44,7 @@
     </Compile>
     <Compile Include="DocumentManagerTests.cs" />
     <Compile Include="DocumentOptionsTests.cs" />
+    <Compile Include="SearchTests.cs" />
     <Compile Include="DocumentTests.cs" />
     <Compile Include="Traits.cs" />
   </ItemGroup>

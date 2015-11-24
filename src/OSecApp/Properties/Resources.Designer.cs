@@ -79,29 +79,20 @@ namespace OSecApp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File argument may not be null..
-        /// </summary>
-        internal static string DocumentOptions_FileIsRequiredException {
-            get {
-                return ResourceManager.GetString("DocumentOptions_FileIsRequiredException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to File argument does not exist..
-        /// </summary>
-        internal static string DocumentOptions_FileNotFoundException {
-            get {
-                return ResourceManager.GetString("DocumentOptions_FileNotFoundException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Options are required..
         /// </summary>
         internal static string OptionsAreRequiredException {
             get {
                 return ResourceManager.GetString("OptionsAreRequiredException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search requires a non-null, non-whitespace search term..
+        /// </summary>
+        internal static string Search_SearchTermRequiredException {
+            get {
+                return ResourceManager.GetString("Search_SearchTermRequiredException", resourceCulture);
             }
         }
     }

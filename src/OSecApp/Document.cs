@@ -6,7 +6,7 @@
     public class Document : IEquatable<Document>
     {
         public const string GeneratedNamePrefix = "Document-";
-        private static volatile int idx = 0;
+        private static int idx = 0;
 
         private readonly DocumentOptions opts;
         private readonly string name;
@@ -66,14 +66,7 @@
 
             if (string.IsNullOrWhiteSpace(opts.Name))
             {
-                if (opts.File != null)
-                {
-                    name = opts.File.Name;
-                }
-                else
-                {
-                    name = string.Format("{0}{1}", GeneratedNamePrefix, Interlocked.Increment(ref idx));
-                }
+                name = string.Format("{0}{1}", GeneratedNamePrefix, Interlocked.Increment(ref idx));
             }
 
             return name;

@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OSecApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="768" Width="1024">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="640" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="480" />
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBox Grid.Column="0" Grid.Row="0" x:Name="txtDocument" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10" TextWrapping="Wrap" />
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Label x:Name="lblDocumentName" Content="Name:" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtDocumentName" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinWidth="300" Margin="10" TextWrapping="Wrap" />
+            <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top" Width="75"/>
+        </StackPanel>
+        <ListBox Grid.Column="0" Grid.Row="2" x:Name="lstFiles" Margin="10" />
     </Grid>
 </Window>

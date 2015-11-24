@@ -57,5 +57,10 @@ namespace Test
 
             Assert.AreEqual(c, docs.Count);
         }
+
+        [Test]
+        public void Returns_Matching_Documents_When_Executing_Search()
+        {
+        }
     }
 }
