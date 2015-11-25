@@ -16,7 +16,7 @@
             <RowDefinition Height="40" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBox Grid.Column="0" Grid.Row="0" x:Name="txtDocument" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10" TextWrapping="Wrap" />
+        <TextBox Grid.Column="0" Grid.Row="0" x:Name="txtDocument" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Path=DocumentText, Mode=TwoWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10" />
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Label x:Name="lblDocumentName" Content="Name:" VerticalAlignment="Center"/>
             <TextBox x:Name="txtDocumentName" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinWidth="300" Margin="10" TextWrapping="Wrap" />

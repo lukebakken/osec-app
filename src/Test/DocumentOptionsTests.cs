@@ -2,7 +2,7 @@ namespace Test
 {
     using System;
     using NUnit.Framework;
-    using OSecApp;
+    using OSecApp.Models;
 
     [TestFixture, UnitTest]
     public class DocumentOptionsTests

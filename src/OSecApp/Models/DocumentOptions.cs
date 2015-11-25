@@ -1,4 +1,4 @@
-﻿namespace OSecApp
+﻿namespace OSecApp.Models
 {
     using System;
 

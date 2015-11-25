@@ -1,28 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace OSecApp
+﻿namespace OSecApp
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    using System.Linq;
+    using System.Windows;
+    using ViewModels;
+
     public partial class MainWindow : Window
     {
+        private static readonly string[] AllowedPasteFormats = new[] {
+            DataFormats.Text,
+            DataFormats.UnicodeText,
+            DataFormats.OemText
+        };
+
         public MainWindow()
         {
             InitializeComponent();
+
+            DataObject.AddPastingHandler(txtDocument, OnDocumentPaste);
+
+            DataContext = new MainWindowViewModel();
+        }
+
+        private void OnDocumentPaste(object sender, DataObjectPastingEventArgs e)
+        {
+            bool isAllowed = false;
+
+            foreach (var f in AllowedPasteFormats)
+            {
+                isAllowed = e.SourceDataObject.GetDataPresent(f, true);
+                if (isAllowed)
+                {
+                    break;
+                }
+            }
+
+            if (isAllowed == false)
+            {
+                e.CancelCommand();
+            }
         }
     }
 }
