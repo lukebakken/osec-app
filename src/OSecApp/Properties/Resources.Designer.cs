@@ -79,6 +79,24 @@ namespace OSecApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Non-empty document text and name are required..
+        /// </summary>
+        internal static string MainWindow_NonEmptyTextAndNameRequired {
+            get {
+                return ResourceManager.GetString("MainWindow_NonEmptyTextAndNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string MessageBox_ErrorCaption {
+            get {
+                return ResourceManager.GetString("MessageBox_ErrorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Options are required..
         /// </summary>
         internal static string OptionsAreRequiredException {
@@ -93,6 +111,15 @@ namespace OSecApp.Properties {
         internal static string Search_SearchTermRequiredException {
             get {
                 return ResourceManager.GetString("Search_SearchTermRequiredException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value must be a non-empty string..
+        /// </summary>
+        internal static string Validation_StringMustHaveValue {
+            get {
+                return ResourceManager.GetString("Validation_StringMustHaveValue", resourceCulture);
             }
         }
     }

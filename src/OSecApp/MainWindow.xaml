@@ -12,16 +12,38 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="480" />
+            <RowDefinition Height="240" />
             <RowDefinition Height="40" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBox Grid.Column="0" Grid.Row="0" x:Name="txtDocument" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Path=DocumentText, Mode=TwoWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10" />
+        <TextBox Grid.Column="0" Grid.Row="0"
+                 x:Name="txtDocument"
+                 Style="{StaticResource ValidationStyleTextBox}"
+                 Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                 Text="{Binding Path=DocumentText, Mode=TwoWay}"
+                 VerticalScrollBarVisibility="Visible" AcceptsReturn="True" TextWrapping="Wrap"
+                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10" />
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Label x:Name="lblDocumentName" Content="Name:" VerticalAlignment="Center"/>
-            <TextBox x:Name="txtDocumentName" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinWidth="300" Margin="10" TextWrapping="Wrap" />
-            <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="txtDocumentName"
+                     Style="{StaticResource ValidationStyleTextBox}"
+                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                     MinWidth="300" Margin="10" TextWrapping="Wrap">
+                <TextBox.Text>
+                    <Binding Path="DocumentName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:NonEmptyStringRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Button x:Name="btnAdd" Click="btnAdd_Click" Content="Add"
+                    HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top" Width="75"/>
         </StackPanel>
-        <ListBox Grid.Column="0" Grid.Row="2" x:Name="lstFiles" Margin="10" />
+        <ListView Grid.Column="0" Grid.Row="2"
+                 x:Name="lstFiles"
+                 ItemsSource="{Binding Path=DocumentNames, Mode=OneWay}"
+                 Margin="10" />
     </Grid>
 </Window>

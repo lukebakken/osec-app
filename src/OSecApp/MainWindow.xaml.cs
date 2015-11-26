@@ -1,6 +1,5 @@
 ﻿namespace OSecApp
 {
-    using System.Linq;
     using System.Windows;
     using ViewModels;
 
@@ -12,13 +11,13 @@
             DataFormats.OemText
         };
 
+        private readonly MainWindowViewModel viewModel = new MainWindowViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
-
             DataObject.AddPastingHandler(txtDocument, OnDocumentPaste);
-
-            DataContext = new MainWindowViewModel();
+            DataContext = viewModel;
         }
 
         private void OnDocumentPaste(object sender, DataObjectPastingEventArgs e)
@@ -37,6 +36,19 @@
             if (isAllowed == false)
             {
                 e.CancelCommand();
+            }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (viewModel.CanAddDocument)
+            {
+                viewModel.AddDocument(txtDocumentName.Text, txtDocument.Text);
+            }
+            else
+            {
+                MessageBox.Show(Properties.Resources.MainWindow_NonEmptyTextAndNameRequired,
+                    Properties.Resources.MessageBox_ErrorCaption, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

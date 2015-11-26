@@ -123,10 +123,19 @@
   <data name="DocumentOptions_ContentIsRequiredException" xml:space="preserve">
     <value>Document content argument may not be null.</value>
   </data>
+  <data name="MainWindow_NonEmptyTextAndNameRequired" xml:space="preserve">
+    <value>Non-empty document text and name are required.</value>
+  </data>
+  <data name="MessageBox_ErrorCaption" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="OptionsAreRequiredException" xml:space="preserve">
     <value>Options are required.</value>
   </data>
   <data name="Search_SearchTermRequiredException" xml:space="preserve">
     <value>Search requires a non-null, non-whitespace search term.</value>
+  </data>
+  <data name="Validation_StringMustHaveValue" xml:space="preserve">
+    <value>Value must be a non-empty string.</value>
   </data>
 </root>
