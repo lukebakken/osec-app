@@ -39,7 +39,7 @@
             }
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private void btnAddDocument_Click(object sender, RoutedEventArgs e)
         {
             if (viewModel.CanAddDocument)
             {
@@ -50,6 +50,10 @@
                 MessageBox.Show(Properties.Resources.MainWindow_NonEmptyTextAndNameRequired,
                     Properties.Resources.MessageBox_ErrorCaption, MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void btnAddSearch_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }
