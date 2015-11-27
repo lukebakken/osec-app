@@ -1,13 +1,12 @@
 namespace Test
 {
     using System;
-    using NUnit.Framework;
     using OSecApp.Models;
+    using Xunit;
 
-    [TestFixture, UnitTest]
     public class SearchTests
     {
-        [Test]
+        [Fact]
         public void New_Search_Requires_Search_Term()
         {
             Assert.Throws<ArgumentNullException>(() =>

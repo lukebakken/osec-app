@@ -1,13 +1,12 @@
 namespace Test
 {
     using System;
-    using NUnit.Framework;
     using OSecApp.Models;
+    using Xunit;
 
-    [TestFixture, UnitTest]
     public class DocumentOptionsTests
     {
-        [Test]
+        [Fact]
         public void New_DocumentOptions_Argument_Validation()
         {
             Assert.Throws<ArgumentNullException>(() =>

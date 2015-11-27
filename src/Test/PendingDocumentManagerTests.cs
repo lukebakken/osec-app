@@ -4,14 +4,13 @@ namespace Test
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
-    using NUnit.Framework;
     using OSecApp.Managers;
     using OSecApp.Models;
+    using Xunit;
 
-    [TestFixture, UnitTest]
     public class PendingDocumentManagerTests
     {
-        [Test]
+        [Fact]
         public void Can_Add_From_Multiple_Threads()
         {
             ushort c = PendingDocumentManager.DefaultCapacity * 2;
@@ -20,7 +19,7 @@ namespace Test
             var m = new PendingDocumentManager();
             m.DocumentEnqueued += (s, e) =>
             {
-                Assert.AreSame(m, s);
+                Assert.Same(m, s);
                 Interlocked.Increment(ref enqueued);
             };
 
@@ -40,8 +39,8 @@ namespace Test
 
             Assert.True(Task.WaitAll(tasks, TimeSpan.FromSeconds(1)));
 
-            Assert.AreEqual(c, m.Count);
-            Assert.AreEqual(c, enqueued);
+            Assert.Equal(c, m.Count);
+            Assert.Equal(c, enqueued);
 
             var docs = new Dictionary<Document, ushort>();
 
@@ -56,12 +55,7 @@ namespace Test
                 docs.Add(d, i);
             }
 
-            Assert.AreEqual(c, docs.Count);
-        }
-
-        [Test]
-        public void Returns_Matching_Documents_When_Executing_Search()
-        {
+            Assert.Equal(c, docs.Count);
         }
     }
 }
