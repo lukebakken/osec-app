@@ -11,6 +11,7 @@
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            pendingDocumentManager.DocumentEnqueued += PendingDocumentManager_DocumentEnqueued;
             var mainWindow = new MainWindow(viewModel, pendingDocumentManager);
             mainWindow.Show();
         }
@@ -19,6 +20,11 @@
         {
             base.OnExit(e);
             pendingDocumentManager.Dispose();
+        }
+
+        private void PendingDocumentManager_DocumentEnqueued(object sender, DocumentEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
 
         // TODO show document replacement in UI

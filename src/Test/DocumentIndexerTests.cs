@@ -5,7 +5,7 @@ namespace Test
     using OSecApp.Models;
     using Xunit;
 
-    public class DocumentManagerTests
+    public class DocumentIndexerTests
     {
         [Fact]
         public void Adding_Document_Indexes_Words()
@@ -13,7 +13,7 @@ namespace Test
             var o = new DocumentOptions("foo bar baz bat", "document-1");
             var d = new Document(o);
 
-            var m = new DocumentManager();
+            var m = new DocumentIndexer();
             m.Add(d);
 
             var s = new Search("baz");

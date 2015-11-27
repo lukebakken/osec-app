@@ -55,7 +55,14 @@
             sync.EnterWriteLock();
             try
             {
-                return docs.Dequeue();
+                Document d = null;
+
+                if (docs.Count > 0)
+                {
+                    d = docs.Dequeue();
+                }
+
+                return d;
             }
             finally
             {

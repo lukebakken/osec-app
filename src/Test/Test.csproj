@@ -43,7 +43,8 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DocumentManagerTests.cs" />
+    <Compile Include="DocumentIndexerTests.cs" />
+    <Compile Include="DocumentMonitorTests.cs" />
     <Compile Include="PendingDocumentManagerTests.cs" />
     <Compile Include="DocumentOptionsTests.cs" />
     <Compile Include="SearchTests.cs" />
@@ -53,6 +54,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
       <Private>True</Private>

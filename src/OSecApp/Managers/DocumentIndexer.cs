@@ -5,7 +5,7 @@
     using System.Threading;
     using Models;
 
-    public class DocumentManager : IDisposable
+    public class DocumentIndexer : IDisposable
     {
         private readonly ReaderWriterLockSlim sync = new ReaderWriterLockSlim();
         private readonly IDictionary<string, IList<Document>> index = new Dictionary<string, IList<Document>>();
