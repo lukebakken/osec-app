@@ -1,6 +1,7 @@
-﻿namespace OSecApp.Models
+﻿namespace OSecApp.Managers
 {
     using System;
+    using Models;
 
     public class DocumentEventArgs : EventArgs
     {

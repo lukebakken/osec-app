@@ -24,7 +24,7 @@
                  VerticalScrollBarVisibility="Visible" AcceptsReturn="True" TextWrapping="Wrap"
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,10" />
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Label x:Name="lblDocumentName" Content="Name:" />
+            <Label x:Name="lblDocumentName" Content="Add Doucument - Name:" />
             <TextBox x:Name="txtDocumentName"
             	Style="{StaticResource ValidationStyleTextBox}"
             	Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
@@ -37,10 +37,9 @@
             </TextBox>
             <Button x:Name="btnAddDocument" Click="btnAddDocument_Click" Content="Add"
                     HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
+            <Label x:Name="lblDocumentCount" Margin="0,0,10,0" VerticalAlignment="Center" Content="{Binding Path=DocumentCount, Mode=OneWay}" />
         </StackPanel>
-        <ListView Grid.Column="0" Grid.Row="2"
-                 x:Name="lstFiles"
-                 ItemsSource="{Binding Path=DocumentNames, Mode=OneWay}" />
+        <ListView Grid.Column="0" Grid.Row="2" x:Name="lstFiles" ItemsSource="{Binding Path=DocumentNames, Mode=OneWay}" />
         <Grid Grid.Column="1" Grid.RowSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />

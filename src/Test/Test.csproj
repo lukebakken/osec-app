@@ -43,6 +43,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="DocumentManagerTests.cs" />
+    <Compile Include="PendingDocumentManagerTests.cs" />
     <Compile Include="DocumentOptionsTests.cs" />
     <Compile Include="SearchTests.cs" />
     <Compile Include="DocumentTests.cs" />

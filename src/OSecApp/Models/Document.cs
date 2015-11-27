@@ -30,6 +30,14 @@
             }
         }
 
+        public string Content
+        {
+            get
+            {
+                return opts.Content;
+            }
+        }
+
         public override string ToString()
         {
             return name;

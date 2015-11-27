@@ -1,10 +1,11 @@
-﻿namespace OSecApp.Models
+﻿namespace OSecApp.Managers
 {
     using System;
     using System.Collections.Generic;
     using System.Threading;
+    using Models;
 
-    public class DocumentManager
+    public class PendingDocumentManager : IDisposable
     {
         public const ushort DefaultCapacity = 128;
 
@@ -27,6 +28,12 @@
                     sync.ExitReadLock();
                 }
             }
+        }
+
+        public void Enqueue(string name, string content)
+        {
+            var opts = new DocumentOptions(content, name);
+            Enqueue(new Document(opts));
         }
 
         public void Enqueue(Document document)
@@ -54,6 +61,11 @@
             {
                 sync.ExitWriteLock();
             }
+        }
+
+        public void Dispose()
+        {
+            sync.Dispose();
         }
 
         private void OnDocumentEnqueued(Document document)

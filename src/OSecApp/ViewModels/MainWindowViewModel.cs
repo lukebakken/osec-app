@@ -8,6 +8,14 @@ namespace OSecApp.ViewModels
         private string documentName;
         private readonly ObservableCollection<string> documentNames = new ObservableCollection<string>();
 
+        public string DocumentCount
+        {
+            get
+            {
+                return string.Format("Count: {0}", documentNames.Count);
+            }
+        }
+
         public string DocumentText
         {
             get
@@ -51,7 +59,7 @@ namespace OSecApp.ViewModels
             }
         }
 
-        public void AddDocument(string name, string text)
+        public void AddDocument(string name)
         {
             documentNames.Add(name);
         }

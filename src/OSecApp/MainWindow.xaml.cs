@@ -1,6 +1,8 @@
 ﻿namespace OSecApp
 {
+    using System;
     using System.Windows;
+    using Managers;
     using ViewModels;
 
     public partial class MainWindow : Window
@@ -11,13 +13,30 @@
             DataFormats.OemText
         };
 
-        private readonly MainWindowViewModel viewModel = new MainWindowViewModel();
+        private readonly MainWindowViewModel viewModel;
+        private readonly PendingDocumentManager pendingDocumentManager;
 
         public MainWindow()
         {
             InitializeComponent();
             DataObject.AddPastingHandler(txtDocument, OnDocumentPaste);
             DataContext = viewModel;
+        }
+
+        public MainWindow(MainWindowViewModel viewModel, PendingDocumentManager pendingDocumentManager)
+            : this()
+        {
+            this.viewModel = viewModel;
+            if (this.viewModel == null)
+            {
+                throw new ArgumentNullException("viewModel");
+            }
+
+            this.pendingDocumentManager = pendingDocumentManager;
+            if (this.pendingDocumentManager == null)
+            {
+                throw new ArgumentNullException("pendingDocumentManager");
+            }
         }
 
         private void OnDocumentPaste(object sender, DataObjectPastingEventArgs e)
@@ -43,7 +62,12 @@
         {
             if (viewModel.CanAddDocument)
             {
-                viewModel.AddDocument(txtDocumentName.Text, txtDocument.Text);
+                string name = txtDocumentName.Text;
+                string content = txtDocument.Text;
+
+                // TODO should be added to view model else where once collision managed
+                viewModel.AddDocument(name);
+                pendingDocumentManager.Enqueue(name, content);
             }
             else
             {
