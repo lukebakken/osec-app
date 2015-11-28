@@ -72,8 +72,8 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Grid.Row="0" x:Name="lblSearch" Content="Search:" />
-            <TextBox Grid.Column="1" Grid.Row="0" x:Name="txtSearchName" HorizontalAlignment="Stretch" Text="{Binding Path=SearchName, Mode=TwoWay}" />
+            <Label Grid.Column="0" Grid.Row="0" x:Name="lblSearch" Content="Search Term:" />
+            <TextBox Grid.Column="1" Grid.Row="0" x:Name="txtSearchTerm" HorizontalAlignment="Stretch" Text="{Binding Path=SearchName, Mode=TwoWay}" />
             <Button Grid.Column="2" Grid.Row="0" x:Name="btnAddSearch" HorizontalAlignment="Right" Click="btnAddSearch_Click" Content="Add" Width="75"/>
             <ListView Grid.ColumnSpan="3" Grid.Row="1" x:Name="lstSearchNames" ItemsSource="{Binding Path=SearchNames, Mode=OneWay}" VerticalAlignment="Stretch" />
         </Grid>

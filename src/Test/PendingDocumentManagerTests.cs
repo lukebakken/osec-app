@@ -17,7 +17,7 @@ namespace Test
             int enqueued = 0;
 
             var m = new PendingDocumentManager();
-            m.DocumentEnqueued += (s, e) =>
+            m.Enqueued += (s, e) =>
             {
                 Assert.Same(m, s);
                 Interlocked.Increment(ref enqueued);

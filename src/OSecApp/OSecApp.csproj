@@ -58,8 +58,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Managers\DocumentEventArgs.cs" />
     <Compile Include="Managers\DocumentIndexer.cs" />
+    <Compile Include="Managers\Monitor.cs" />
     <Compile Include="Managers\DocumentMonitor.cs" />
+    <Compile Include="Managers\PendingSearchManager.cs" />
+    <Compile Include="Managers\PendingManager.cs" />
     <Compile Include="Models\Search.cs" />
     <Compile Include="NonEmptyStringRule.cs" />
     <Compile Include="Validation.cs" />
@@ -75,7 +79,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Document.cs" />
-    <Compile Include="Managers\DocumentEventArgs.cs" />
     <Compile Include="Managers\PendingDocumentManager.cs" />
     <Compile Include="Models\DocumentOptions.cs" />
     <Compile Include="MainWindow.xaml.cs">

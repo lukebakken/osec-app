@@ -14,6 +14,7 @@
 
         private readonly MainWindowViewModel viewModel = new MainWindowViewModel();
         private readonly PendingDocumentManager pendingDocumentManager = new PendingDocumentManager();
+        private readonly PendingSearchManager pendingSearchManager = new PendingSearchManager();
         private readonly DocumentIndexer documentIndexer = new DocumentIndexer();
         private readonly DocumentMonitor documentMonitor;
 
@@ -31,7 +32,7 @@
             documentMonitor.DocumentAdded += DocumentMonitor_DocumentAdded;
             documentMonitor.DocumentReplaced += DocumentMonitor_DocumentReplaced;
 
-            mainWindow = new MainWindow(viewModel, pendingDocumentManager);
+            mainWindow = new MainWindow(viewModel, pendingDocumentManager, pendingSearchManager);
             mainWindow.Show();
         }
 

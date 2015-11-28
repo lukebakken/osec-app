@@ -17,13 +17,17 @@
 
         private readonly MainWindowViewModel viewModel;
         private readonly PendingDocumentManager pendingDocumentManager;
+        private readonly PendingSearchManager pendingSearchManager;
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        public MainWindow(MainWindowViewModel viewModel, PendingDocumentManager pendingDocumentManager)
+        public MainWindow(
+            MainWindowViewModel viewModel,
+            PendingDocumentManager pendingDocumentManager,
+            PendingSearchManager pendingSearchManager)
             : this()
         {
             this.viewModel = viewModel;
@@ -36,6 +40,12 @@
             if (this.pendingDocumentManager == null)
             {
                 throw new ArgumentNullException("pendingDocumentManager");
+            }
+
+            this.pendingSearchManager = pendingSearchManager;
+            if (this.pendingSearchManager == null)
+            {
+                throw new ArgumentNullException("pendingSearchManager");
             }
 
             DataObject.AddPastingHandler(txtDocument, OnDocumentPaste);
@@ -88,6 +98,7 @@
 
         private void btnAddSearch_Click(object sender, RoutedEventArgs e)
         {
+            pendingSearchManager.Enqueue(new Search(txtSearchTerm.Text));
         }
 
         private void lstFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
