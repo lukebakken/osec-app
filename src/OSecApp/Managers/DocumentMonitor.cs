@@ -1,6 +1,7 @@
 ﻿namespace OSecApp.Managers
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
     using Models;
@@ -9,14 +10,22 @@
     public class DocumentMonitor : IDisposable
     {
         private readonly ILogger log = LogManager.GetCurrentClassLogger();
+
         private readonly PendingDocumentManager pendingDocumentManager;
+        private readonly DocumentIndexer documentIndexer;
+
+        private readonly ISet<Document> documents = new HashSet<Document>();
+
         private readonly AutoResetEvent queueEvent = new AutoResetEvent(false);
         private readonly CancellationToken ct;
         private readonly Task monitorTask;
 
         private volatile bool running = true;
 
-        public DocumentMonitor(CancellationTokenSource cts, PendingDocumentManager pendingDocumentManager)
+        public DocumentMonitor(
+            CancellationTokenSource cts,
+            PendingDocumentManager pendingDocumentManager,
+            DocumentIndexer documentIndexer)
         {
             if (cts == null)
             {
@@ -27,6 +36,12 @@
             if (this.pendingDocumentManager == null)
             {
                 throw new ArgumentNullException("pendingDocumentManager");
+            }
+
+            this.documentIndexer = documentIndexer;
+            if (this.documentIndexer == null)
+            {
+                throw new ArgumentNullException("documentIndexer");
             }
 
             pendingDocumentManager.DocumentEnqueued += PendingDocumentManager_DocumentEnqueued;
@@ -44,14 +59,36 @@
 
         private void Monitor()
         {
+            log.Debug("monitor is starting");
+
             while (running && ct.IsCancellationRequested == false)
             {
-                if (queueEvent.WaitOne(TimeSpan.FromSeconds(1)))
+                if (queueEvent.WaitOne(TimeSpan.FromMilliseconds(125)))
                 {
                     Document d = null;
                     do
                     {
                         d = pendingDocumentManager.Dequeue();
+                        if (d == null)
+                        {
+                            break;
+                        }
+
+                        if (documents.Contains(d))
+                        {
+                            // "Replace" action
+                            documents.Remove(d);
+                            documents.Add(d);
+
+                            documentIndexer.Replace(d);
+
+                            OnDocumentReplaced(d);
+                        }
+                        else
+                        {
+                            documents.Add(d);
+                            documentIndexer.Add(d);
+                        }
                     }
                     while (d != null);
                 }
@@ -60,6 +97,8 @@
                     log.Debug("no documents enqueued");
                 }
             }
+
+            log.Debug("monitor is stopping");
         }
 
         private void OnDocumentReplaced(Document document)
