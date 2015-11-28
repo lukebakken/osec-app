@@ -115,6 +115,15 @@ namespace OSecApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search is required for event..
+        /// </summary>
+        internal static string SearchEventArgs_SearchRequiredException {
+            get {
+                return ResourceManager.GetString("SearchEventArgs_SearchRequiredException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value must be a non-empty string..
         /// </summary>
         internal static string Validation_StringMustHaveValue {

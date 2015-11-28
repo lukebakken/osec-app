@@ -9,6 +9,7 @@
         private string documentContent;
 
         private readonly ObservableCollection<DocumentViewModel> documents = new ObservableCollection<DocumentViewModel>();
+        private readonly ObservableCollection<SearchViewModel> searches = new ObservableCollection<SearchViewModel>();
 
         public string DocumentCount
         {
@@ -61,6 +62,14 @@
             }
         }
 
+        public ObservableCollection<SearchViewModel> Searches
+        {
+            get
+            {
+                return searches;
+            }
+        }
+
         public void AddDocument(Document document)
         {
             var vm = new DocumentViewModel
@@ -89,6 +98,15 @@
             {
                 OnPropertyChanged("Documents");
             }
+        }
+
+        public void AddSearch(Search search)
+        {
+            var vm = new SearchViewModel
+            {
+                Term = search.Term,
+            };
+            searches.Add(vm);
         }
     }
 }

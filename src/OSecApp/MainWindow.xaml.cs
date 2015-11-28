@@ -96,6 +96,11 @@
             Dispatcher.Invoke(() => viewModel.ReplaceDocument(document));
         }
 
+        public void AddSearch(Search search)
+        {
+            Dispatcher.Invoke(() => viewModel.AddSearch(search));
+        }
+
         private void btnAddSearch_Click(object sender, RoutedEventArgs e)
         {
             pendingSearchManager.Enqueue(new Search(txtSearchTerm.Text));

@@ -10,9 +10,9 @@
 
         public DocumentMonitor(
             CancellationTokenSource cts,
-            PendingDocumentManager pendingDocumentManager,
+            PendingDocumentManager itemManager,
             DocumentIndexer documentIndexer)
-            : base(cts, pendingDocumentManager)
+            : base(cts, itemManager)
         {
 
             this.documentIndexer = documentIndexer;

@@ -132,6 +132,9 @@
   <data name="OptionsAreRequiredException" xml:space="preserve">
     <value>Options are required.</value>
   </data>
+  <data name="SearchEventArgs_SearchRequiredException" xml:space="preserve">
+    <value>Search is required for event.</value>
+  </data>
   <data name="Search_SearchTermRequiredException" xml:space="preserve">
     <value>Search requires a non-null, non-whitespace search term.</value>
   </data>
