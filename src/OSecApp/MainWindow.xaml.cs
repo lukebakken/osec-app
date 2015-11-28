@@ -2,6 +2,7 @@
 {
     using System;
     using System.Windows;
+    using System.Windows.Controls;
     using Managers;
     using Models;
     using ViewModels;
@@ -87,6 +88,15 @@
 
         private void btnAddSearch_Click(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void lstFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var lv = (ListView)sender;
+            var vm = (DocumentViewModel)lv.SelectedItem;
+
+            viewModel.DocumentName = vm.Name;
+            viewModel.DocumentContent = vm.Content;
         }
     }
 }

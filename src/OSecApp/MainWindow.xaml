@@ -6,6 +6,18 @@
         xmlns:local="clr-namespace:OSecApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="768" Width="1024">
+    <Window.Resources>
+        <Style x:Key="AlternatingListViewItemStyle" TargetType="{x:Type ListViewItem}">
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="Background" Value="Beige" />
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="Bisque" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="640" />
@@ -20,7 +32,7 @@
                  x:Name="txtDocument"
                  Style="{StaticResource ValidationStyleTextBox}"
                  Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
-                 Text="{Binding Path=DocumentText, Mode=TwoWay}"
+                 Text="{Binding Path=DocumentContent, Mode=TwoWay}"
                  VerticalScrollBarVisibility="Visible" AcceptsReturn="True" TextWrapping="Wrap"
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,10" />
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
@@ -39,7 +51,17 @@
                     HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
             <Label x:Name="lblDocumentCount" Margin="0,0,10,0" VerticalAlignment="Center" Content="{Binding Path=DocumentCount, Mode=OneWay}" />
         </StackPanel>
-        <ListView Grid.Column="0" Grid.Row="2" x:Name="lstFiles" ItemsSource="{Binding Path=DocumentNames, Mode=OneWay}" />
+        <ListView Grid.Column="0" Grid.Row="2" x:Name="lstFiles"
+                  ItemsSource="{Binding Path=Documents, Mode=OneWay}"
+                  ItemContainerStyle="{StaticResource AlternatingListViewItemStyle}"
+                  AlternationCount="2" SelectionChanged="lstFiles_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="120" />
+                    <GridViewColumn Header="Is Match" DisplayMemberBinding="{Binding IsMatchChar}" Width="120" />
+                </GridView>
+            </ListView.View>
+        </ListView>
         <Grid Grid.Column="1" Grid.RowSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />

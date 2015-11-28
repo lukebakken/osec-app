@@ -5,29 +5,16 @@
 
     public class MainWindowViewModel : ViewModelBase
     {
-        private string documentText;
         private string documentName;
+        private string documentContent;
 
-        private readonly ObservableCollection<string> documentNames = new ObservableCollection<string>();
+        private readonly ObservableCollection<DocumentViewModel> documents = new ObservableCollection<DocumentViewModel>();
 
         public string DocumentCount
         {
             get
             {
-                return string.Format("Count: {0}", documentNames.Count);
-            }
-        }
-
-        public string DocumentText
-        {
-            get
-            {
-                return documentText;
-            }
-            
-            set
-            {
-                SetProperty(ref documentText, value);
+                return string.Format("Count: {0}", documents.Count);
             }
         }
 
@@ -44,31 +31,64 @@
             }
         }
 
+        public string DocumentContent
+        {
+            get
+            {
+                return documentContent;
+            }
+            
+            set
+            {
+                SetProperty(ref documentContent, value);
+            }
+        }
+
         public bool CanAddDocument
         {
             get
             {
-                return Validation.NonEmptyString(documentText) &&
+                return Validation.NonEmptyString(documentContent) &&
                        Validation.NonEmptyString(documentName);
             }
         }
 
-        public ObservableCollection<string> DocumentNames
+        public ObservableCollection<DocumentViewModel> Documents
         {
             get
             {
-                return documentNames;
+                return documents;
             }
         }
 
         public void AddDocument(Document document)
         {
-            documentNames.Add(document.Name);
+            var vm = new DocumentViewModel
+            {
+                Name = document.Name,
+                Content = document.Content
+            };
+            documents.Add(vm);
         }
 
-        // TODO argument is new document
         public void ReplaceDocument(Document document)
         {
+            bool replaced = false;
+
+            foreach (var vm in documents)
+            {
+                if (vm.Name == document.Name)
+                {
+                    vm.Content = document.Content;
+                    replaced = true;
+                    break;
+                }
+            }
+
+            if (replaced)
+            {
+                OnPropertyChanged("Documents");
+            }
         }
     }
 }

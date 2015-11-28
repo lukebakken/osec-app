@@ -63,6 +63,7 @@
     <Compile Include="Models\Search.cs" />
     <Compile Include="NonEmptyStringRule.cs" />
     <Compile Include="Validation.cs" />
+    <Compile Include="ViewModels\DocumentViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
