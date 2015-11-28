@@ -3,6 +3,7 @@
     using System;
     using System.Windows;
     using Managers;
+    using Models;
     using ViewModels;
 
     public partial class MainWindow : Window
@@ -19,8 +20,6 @@
         public MainWindow()
         {
             InitializeComponent();
-            DataObject.AddPastingHandler(txtDocument, OnDocumentPaste);
-            DataContext = viewModel;
         }
 
         public MainWindow(MainWindowViewModel viewModel, PendingDocumentManager pendingDocumentManager)
@@ -37,6 +36,9 @@
             {
                 throw new ArgumentNullException("pendingDocumentManager");
             }
+
+            DataObject.AddPastingHandler(txtDocument, OnDocumentPaste);
+            DataContext = this.viewModel;
         }
 
         private void OnDocumentPaste(object sender, DataObjectPastingEventArgs e)
@@ -64,9 +66,6 @@
             {
                 string name = txtDocumentName.Text;
                 string content = txtDocument.Text;
-
-                // TODO should be added to view model else where once collision managed
-                viewModel.AddDocument(name);
                 pendingDocumentManager.Enqueue(name, content);
             }
             else
@@ -74,6 +73,16 @@
                 MessageBox.Show(Properties.Resources.MainWindow_NonEmptyTextAndNameRequired,
                     Properties.Resources.MessageBox_ErrorCaption, MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        public void AddDocument(Document document)
+        {
+            Dispatcher.Invoke(() => viewModel.AddDocument(document));
+        }
+
+        public void ReplaceDocument(Document document)
+        {
+            Dispatcher.Invoke(() => viewModel.ReplaceDocument(document));
         }
 
         private void btnAddSearch_Click(object sender, RoutedEventArgs e)

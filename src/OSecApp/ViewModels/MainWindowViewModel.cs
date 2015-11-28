@@ -1,11 +1,13 @@
-﻿using System.Collections.ObjectModel;
-
-namespace OSecApp.ViewModels
+﻿namespace OSecApp.ViewModels
 {
+    using System.Collections.ObjectModel;
+    using OSecApp.Models;
+
     public class MainWindowViewModel : ViewModelBase
     {
         private string documentText;
         private string documentName;
+
         private readonly ObservableCollection<string> documentNames = new ObservableCollection<string>();
 
         public string DocumentCount
@@ -59,9 +61,14 @@ namespace OSecApp.ViewModels
             }
         }
 
-        public void AddDocument(string name)
+        public void AddDocument(Document document)
         {
-            documentNames.Add(name);
+            documentNames.Add(document.Name);
+        }
+
+        // TODO argument is new document
+        public void ReplaceDocument(Document document)
+        {
         }
     }
 }

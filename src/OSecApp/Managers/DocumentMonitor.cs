@@ -50,6 +50,7 @@
             monitorTask = Task.Run((Action)Monitor);
         }
 
+        public event EventHandler<DocumentEventArgs> DocumentAdded;
         public event EventHandler<DocumentEventArgs> DocumentReplaced;
 
         private void PendingDocumentManager_DocumentEnqueued(object sender, DocumentEventArgs e)
@@ -88,17 +89,27 @@
                         {
                             documents.Add(d);
                             documentIndexer.Add(d);
+
+                            OnDocumentAdded(d);
                         }
                     }
                     while (d != null);
                 }
                 else
                 {
-                    log.Debug("no documents enqueued");
+                    log.Trace("no documents enqueued");
                 }
             }
 
             log.Debug("monitor is stopping");
+        }
+
+        private void OnDocumentAdded(Document document)
+        {
+            if (DocumentAdded != null)
+            {
+                DocumentAdded(this, new DocumentEventArgs(document));
+            }
         }
 
         private void OnDocumentReplaced(Document document)
@@ -112,6 +123,7 @@
         public void Dispose()
         {
             running = false;
+            pendingDocumentManager.DocumentEnqueued -= PendingDocumentManager_DocumentEnqueued;
             pendingDocumentManager.Dispose();
             monitorTask.Wait(TimeSpan.FromSeconds(5));
             monitorTask.Dispose();
