@@ -58,9 +58,13 @@
             }
         }
 
-        protected abstract void OnItemReplaced(TItem item);
+        protected virtual void OnItemReplaced(TItem item)
+        {
+        }
 
-        protected abstract void OnItemAdded(TItem item);
+        protected virtual void OnItemAdded(TItem item)
+        {
+        }
 
         private void ItemManager_Enqueued(object sender, EventArgs e)
         {

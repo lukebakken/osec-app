@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EnumerableUtil.cs" />
     <Compile Include="Managers\SearchEventArgs.cs" />
     <Compile Include="Managers\DocumentEventArgs.cs" />
     <Compile Include="Managers\DocumentIndexer.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Models\Search.cs" />
     <Compile Include="NonEmptyStringRule.cs" />
     <Compile Include="Validation.cs" />
+    <Compile Include="ViewModels\Constants.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\DocumentViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

@@ -6,27 +6,30 @@
 
     public class SearchMonitor : Monitor<Search, PendingSearchManager>
     {
-        public SearchMonitor(CancellationTokenSource cts, PendingSearchManager itemManager)
+        private readonly DocumentIndexer documentIndexer;
+
+        public SearchMonitor(
+            CancellationTokenSource cts,
+            PendingSearchManager itemManager,
+            DocumentIndexer documentIndexer)
             : base(cts, itemManager)
         {
-        }
-
-        public event EventHandler<SearchEventArgs> SearchAdded;
-        public event EventHandler<SearchEventArgs> SearchReplaced;
-
-        protected override void OnItemAdded(Search item)
-        {
-            if (SearchAdded != null)
+            this.documentIndexer = documentIndexer;
+            if (this.documentIndexer == null)
             {
-                SearchAdded(this, new SearchEventArgs(item));
+                throw new ArgumentNullException("documentIndexer");
             }
         }
 
-        protected override void OnItemReplaced(Search item)
+        public event EventHandler<SearchEventArgs> SearchComplete;
+
+        protected override void OnItemAdded(Search search)
         {
-            if (SearchReplaced != null)
+            documentIndexer.Search(search);
+
+            if (SearchComplete != null)
             {
-                SearchReplaced(this, new SearchEventArgs(item));
+                SearchComplete(this, new SearchEventArgs(search));
             }
         }
     }

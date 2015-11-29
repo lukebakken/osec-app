@@ -28,5 +28,13 @@
         {
             get; set;
         }
+
+        public bool HasMatches
+        {
+            get
+            {
+                return EnumerableUtil.NotNullOrEmpty(Matches);
+            }
+        }
     }
 }

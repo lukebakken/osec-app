@@ -14,7 +14,6 @@
             DocumentIndexer documentIndexer)
             : base(cts, itemManager)
         {
-
             this.documentIndexer = documentIndexer;
             if (this.documentIndexer == null)
             {

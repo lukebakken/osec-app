@@ -27,7 +27,7 @@
         public App()
         {
             documentMonitor = new DocumentMonitor(cts, pendingDocumentManager, documentIndexer);
-            searchMonitor = new SearchMonitor(cts, pendingSearchManager);
+            searchMonitor = new SearchMonitor(cts, pendingSearchManager, documentIndexer);
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
@@ -37,7 +37,7 @@
             documentMonitor.DocumentAdded += DocumentMonitor_DocumentAdded;
             documentMonitor.DocumentReplaced += DocumentMonitor_DocumentReplaced;
 
-            searchMonitor.SearchAdded += SearchMonitor_SearchAdded;
+            searchMonitor.SearchComplete += SearchMonitor_SearchComplete;
 
             mainWindow = new MainWindow(viewModel, pendingDocumentManager, pendingSearchManager);
             mainWindow.Show();
@@ -52,7 +52,7 @@
             documentMonitor.DocumentAdded -= DocumentMonitor_DocumentAdded;
             documentMonitor.DocumentReplaced -= DocumentMonitor_DocumentReplaced;
 
-            searchMonitor.SearchAdded -= SearchMonitor_SearchAdded;
+            searchMonitor.SearchComplete -= SearchMonitor_SearchComplete;
 
             pendingDocumentManager.Dispose();
             pendingSearchManager.Dispose();
@@ -73,9 +73,9 @@
             mainWindow.ReplaceDocument(e.Document);
         }
 
-        private void SearchMonitor_SearchAdded(object sender, SearchEventArgs e)
+        private void SearchMonitor_SearchComplete(object sender, SearchEventArgs e)
         {
-            mainWindow.AddSearch(e.Search);
+            mainWindow.SearchComplete(e.Search);
         }
     }
 }

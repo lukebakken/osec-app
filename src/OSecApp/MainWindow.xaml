@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OSecApp"
+        xmlns:localViewModels="clr-namespace:OSecApp.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="768" Width="1024">
     <Window.Resources>
@@ -40,7 +41,7 @@
             <TextBox x:Name="txtDocumentName"
             	Style="{StaticResource ValidationStyleTextBox}"
             	Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
-            	MinWidth="240">
+            	MinWidth="240" VerticalAlignment="Center">
                 <Binding Path="DocumentName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <local:NonEmptyStringRule />
@@ -48,7 +49,7 @@
                 </Binding>
             </TextBox>
             <Button x:Name="btnAddDocument" Click="btnAddDocument_Click" Content="Add"
-                    HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
+                    HorizontalAlignment="Right" VerticalAlignment="Center" Width="75"/>
             <Label x:Name="lblDocumentCount" Margin="0,0,10,0" VerticalAlignment="Center" Content="{Binding Path=DocumentCount, Mode=OneWay}" />
         </StackPanel>
         <ListView Grid.Column="0" Grid.Row="2" x:Name="lstFiles"
@@ -58,7 +59,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="120" />
-                    <GridViewColumn Header="Is Match" DisplayMemberBinding="{Binding IsMatchChar}" Width="120" />
+                    <GridViewColumn Header="Match" DisplayMemberBinding="{Binding IsMatchChar}" Width="120" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -73,15 +74,24 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Label Grid.Column="0" Grid.Row="0" x:Name="lblSearch" Content="Search Term:" />
-            <TextBox Grid.Column="1" Grid.Row="0" x:Name="txtSearchTerm" HorizontalAlignment="Stretch" Text="{Binding Path=SearchName, Mode=TwoWay}" />
-            <Button Grid.Column="2" Grid.Row="0" x:Name="btnAddSearch" HorizontalAlignment="Right" Click="btnAddSearch_Click" Content="Add" Width="75"/>
-            <ListView Grid.ColumnSpan="3" Grid.Row="1" x:Name="lstSearchTerms"
-                      ItemsSource="{Binding Path=Searches, Mode=OneWay}" VerticalAlignment="Stretch">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Search Terms" DisplayMemberBinding="{Binding Term}" Width="240" />
-                    </GridView>
-                </ListView.View>
+            <TextBox Grid.Column="1" Grid.Row="0" x:Name="txtSearchTerm" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            <Button Grid.Column="2" Grid.Row="0" x:Name="btnAddSearch" VerticalAlignment="Center" HorizontalAlignment="Right" Click="btnAddSearch_Click" Content="Add" Width="75"/>
+            <ListView Grid.ColumnSpan="3" Grid.Row="1" x:Name="lstSearchTerms" ItemsSource="{Binding Path=Searches, Mode=OneWay}" VerticalAlignment="Stretch">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type localViewModels:SearchViewModel}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Name="searchTerm" Grid.Column="0" Grid.Row="0" Margin="0" MinWidth="120" Text="{Binding Term}" VerticalAlignment="Center" />
+                            <Button Name="searchExe" Grid.Column="1" Grid.Row="0" Margin="0" Click="searchExeButton_Click" Content="Execute" VerticalAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </Grid>
     </Grid>

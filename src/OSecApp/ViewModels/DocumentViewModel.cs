@@ -1,9 +1,9 @@
 ﻿namespace OSecApp.ViewModels
 {
-    public class DocumentViewModel
+    public class DocumentViewModel : ViewModelBase
     {
-        private const string checkMark = "\u2713";
-        private const string ballotX = "\u2717";
+        private string content;
+        private char isMatchChar = Constants.BallotX;
 
         public string Name
         {
@@ -12,27 +12,35 @@
 
         public string Content
         {
-            get; set;
+            get
+            {
+                return content;
+            }
+
+            set
+            {
+                SetProperty(ref content, value);
+            }
         }
 
-        public string IsMatchChar
+        public char IsMatchChar
         {
             get
             {
-                if (IsMatch)
-                {
-                    return checkMark;
-                }
-                else
-                {
-                    return ballotX;
-                }
+                return isMatchChar;
+            }
+            set
+            {
+                SetProperty(ref isMatchChar, value);
             }
         }
 
         public bool IsMatch
         {
-            get; set;
+            set
+            {
+                IsMatchChar = value ? Constants.CheckMark : Constants.BallotX;
+            }
         }
     }
 }

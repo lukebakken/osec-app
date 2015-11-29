@@ -75,9 +75,11 @@
         {
             if (viewModel.CanAddDocument)
             {
-                string name = txtDocumentName.Text;
-                string content = txtDocument.Text;
+                string name = viewModel.DocumentName;
+                string content = viewModel.DocumentContent;
                 pendingDocumentManager.Enqueue(name, content);
+
+                viewModel.ClearDocument();
             }
             else
             {
@@ -96,14 +98,15 @@
             Dispatcher.Invoke(() => viewModel.ReplaceDocument(document));
         }
 
-        public void AddSearch(Search search)
+        public void SearchComplete(Search search)
         {
-            Dispatcher.Invoke(() => viewModel.AddSearch(search));
+            Dispatcher.Invoke(() => viewModel.SearchComplete(search));
         }
 
         private void btnAddSearch_Click(object sender, RoutedEventArgs e)
         {
-            pendingSearchManager.Enqueue(new Search(txtSearchTerm.Text));
+            viewModel.AddSearch(new Search(txtSearchTerm.Text));
+            txtSearchTerm.Text = null;
         }
 
         private void lstFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -113,6 +116,13 @@
 
             viewModel.DocumentName = vm.Name;
             viewModel.DocumentContent = vm.Content;
+        }
+
+        private void searchExeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var b = (Button)sender;
+            var vm = (SearchViewModel)b.DataContext;
+            pendingSearchManager.Enqueue(new Search(vm.Term));
         }
     }
 }
