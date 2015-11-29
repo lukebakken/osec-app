@@ -101,7 +101,11 @@
 
         public void ReplaceDocument(Document document)
         {
-            Dispatcher.Invoke(() => viewModel.ReplaceDocument(document));
+            Dispatcher.Invoke(() =>
+            {
+                viewModel.ReplaceDocument(document);
+                IsEnabled = true;
+            });
         }
 
         public void SearchComplete(Search search)
