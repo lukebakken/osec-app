@@ -116,6 +116,7 @@
 
             viewModel.DocumentName = vm.Name;
             viewModel.DocumentContent = vm.Content;
+            viewModel.ClearReplaced();
         }
 
         private void searchExeButton_Click(object sender, RoutedEventArgs e)

@@ -1,5 +1,6 @@
 ﻿namespace OSecApp.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Models;
@@ -85,21 +86,14 @@
 
         public void ReplaceDocument(Document document)
         {
-            bool replaced = false;
-
             foreach (var vm in documents)
             {
                 if (vm.Name == document.Name)
                 {
                     vm.Content = document.Content;
-                    replaced = true;
+                    vm.IsReplaced = true;
                     break;
                 }
-            }
-
-            if (replaced)
-            {
-                OnPropertyChanged("Documents");
             }
         }
 
@@ -135,6 +129,14 @@
                     var vm = documentLookup[d.Name];
                     vm.IsMatch = true;
                 }
+            }
+        }
+
+        public void ClearReplaced()
+        {
+            foreach (var d in documents)
+            {
+                d.IsReplaced = false;
             }
         }
     }

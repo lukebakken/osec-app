@@ -4,6 +4,7 @@
     {
         private string content;
         private char isMatchChar = Constants.BallotX;
+        private string isReplacedString;
 
         public string Name
         {
@@ -40,6 +41,27 @@
             set
             {
                 IsMatchChar = value ? Constants.CheckMark : Constants.BallotX;
+            }
+        }
+
+        public string IsReplacedString
+        {
+            get
+            {
+                return isReplacedString;
+            }
+
+            set
+            {
+                SetProperty(ref isReplacedString, value);
+            }
+        }
+
+        public bool IsReplaced
+        {
+            set
+            {
+                IsReplacedString = value ? Constants.Recycling : string.Empty;
             }
         }
     }
