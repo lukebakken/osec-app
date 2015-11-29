@@ -75,6 +75,8 @@
         {
             if (viewModel.CanAddDocument)
             {
+                IsEnabled = false;
+
                 string name = viewModel.DocumentName;
                 string content = viewModel.DocumentContent;
                 pendingDocumentManager.Enqueue(name, content);
@@ -90,7 +92,11 @@
 
         public void AddDocument(Document document)
         {
-            Dispatcher.Invoke(() => viewModel.AddDocument(document));
+            Dispatcher.Invoke(() =>
+            {
+                viewModel.AddDocument(document);
+                IsEnabled = true;
+            });
         }
 
         public void ReplaceDocument(Document document)
@@ -100,7 +106,11 @@
 
         public void SearchComplete(Search search)
         {
-            Dispatcher.Invoke(() => viewModel.SearchComplete(search));
+            Dispatcher.Invoke(() =>
+            {
+                viewModel.SearchComplete(search);
+                IsEnabled = true;
+            });
         }
 
         private void btnAddSearch_Click(object sender, RoutedEventArgs e)
@@ -121,6 +131,8 @@
 
         private void searchExeButton_Click(object sender, RoutedEventArgs e)
         {
+            IsEnabled = false;
+
             var b = (Button)sender;
             var vm = (SearchViewModel)b.DataContext;
             pendingSearchManager.Enqueue(new Search(vm.Term));
