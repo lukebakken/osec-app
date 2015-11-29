@@ -1,13 +1,15 @@
 ﻿namespace OSecApp.ViewModels
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using OSecApp.Models;
+    using Models;
 
     public class MainWindowViewModel : ViewModelBase
     {
         private string documentName;
         private string documentContent;
 
+        private readonly Dictionary<string, DocumentViewModel> documentLookup = new Dictionary<string, DocumentViewModel>();
         private readonly ObservableCollection<DocumentViewModel> documents = new ObservableCollection<DocumentViewModel>();
         private readonly ObservableCollection<SearchViewModel> searches = new ObservableCollection<SearchViewModel>();
 
@@ -78,6 +80,7 @@
                 Content = document.Content
             };
             documents.Add(vm);
+            documentLookup[vm.Name] = vm;
         }
 
         public void ReplaceDocument(Document document)
@@ -100,6 +103,12 @@
             }
         }
 
+        public void ClearDocument()
+        {
+            DocumentName = null;
+            DocumentContent = null;
+        }
+
         public void AddSearch(Search search)
         {
             var vm = new SearchViewModel
@@ -107,6 +116,26 @@
                 Term = search.Term,
             };
             searches.Add(vm);
+        }
+
+        public void SearchComplete(Search search)
+        {
+            // TODO: if necessary, this could be sped up
+            // via use of sets and set operations
+
+            foreach (var vm in documents)
+            {
+                vm.IsMatch = false;
+            }
+
+            if (search.HasMatches)
+            {
+                foreach (var d in search.Matches)
+                {
+                    var vm = documentLookup[d.Name];
+                    vm.IsMatch = true;
+                }
+            }
         }
     }
 }
