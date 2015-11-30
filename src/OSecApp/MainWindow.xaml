@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OSecApp"
         xmlns:localViewModels="clr-namespace:OSecApp.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1024">
+        Title="OSec App" Height="768" Width="1024">
     <Window.Resources>
         <Style x:Key="AlternatingListViewItemStyle" TargetType="{x:Type ListViewItem}">
             <Style.Triggers>
